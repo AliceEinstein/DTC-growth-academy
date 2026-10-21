@@ -1,2 +1,102 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>DTC Growth Academy</title></head><body><h1>DTC Growth Academy</h1><p>Interactive training labs are being prepared. Synthetic examples only.</p></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DTC Growth Academy — Operator Labs</title>
+<meta name="description" content="Free interactive decision labs for DTC contribution economics, creator investments, and affiliate commissions.">
+<style>
+:root{font:16px system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#0a1d22;color:#e9f5f3}*{box-sizing:border-box}
+body{margin:0}.wrap{max-width:1100px;margin:auto;padding:25px}header{border-bottom:1px solid #31575d}
+.brand{font-size:15px;font-weight:800;letter-spacing:.08em}.eyebrow{color:#7fdfc0;font-size:12px;text-transform:uppercase;letter-spacing:.14em}
+h1{font-size:clamp(34px,5vw,57px);line-height:1.1;letter-spacing:-.045em;margin:20px 0}h2{font-size:24px;margin:2px 0 12px}
+p{line-height:1.65;color:#aec7c9}.hero{padding:30px 0 8px}.tabs{display:flex;gap:9px;flex-wrap:wrap;margin:23px 0}
+button{font:inherit;padding:12px 17px;border:1px solid #3c656a;border-radius:11px;background:#17383e;color:#dcefeb;cursor:pointer}
+button.active,button.primary{background:#6cddba;color:#082d2b;border-color:#6cddba;font-weight:750}
+.grid{display:grid;grid-template-columns:minmax(280px,1fr) minmax(350px,1fr);gap:16px}
+.panel{background:#123139;border:1px solid #315660;border-radius:17px;padding:22px;min-width:0}
+label{display:flex;justify-content:space-between;margin:15px 0 7px;color:#c8dee0;font-size:14px;gap:12px}
+label span{font-weight:700;color:#fff;font-variant-numeric:tabular-nums}input[type=range]{width:100%;accent-color:#76e6bd}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px}
+.metric{background:#0b252c;border-radius:12px;padding:15px}.metric small{color:#94b3ba;display:block}.metric b{font-size:25px;display:block;margin-top:8px}
+.note{border-left:3px solid #75e2b9;padding:12px;background:#173f43;border-radius:5px;color:#d1e8e6;line-height:1.6;margin-top:17px}
+.positive{color:#91f3ba}.negative{color:#ffa397}.formula{font:12px/1.8 ui-monospace,monospace;border:1px solid #42656c;padding:12px;border-radius:11px;overflow-wrap:anywhere;margin-top:16px}
+.chart{height:155px;display:flex;align-items:flex-end;gap:10px;border-bottom:1px solid #46696b;margin:28px 0 8px}
+.col{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-size:11px;gap:3px}.bar{width:57%;background:#6cddba;min-height:2px}
+footer{border-top:1px solid #31575d;margin-top:33px;padding:20px 0;font-size:12px;color:#9bb8bd}
+[hidden]{display:none!important}@media(max-width:790px){.grid{grid-template-columns:1fr}.wrap{padding:17px}.panel{padding:18px}}
+</style></head>
+<body><header><div class="wrap brand">◈ DTC GROWTH ACADEMY <span style="color:#82b9b0;font-weight:400">/ OPERATOR LABS</span></div></header>
+<main class="wrap"><div class="hero"><div class="eyebrow">Decision training · synthetic scenarios only</div>
+<h1>Every marketing dollar<br>needs a business case.</h1>
+<p>Explore first-order unit economics, creator campaign investment, and affiliate commission policy. All inputs are illustrative. No accounts, no trackers, no third-party requests.</p></div>
+<nav class="tabs" aria-label="Choose simulation"><button class="active" data-tab="economics" aria-selected="true">01 · Unit economics</button>
+<button data-tab="creator" aria-selected="false">16 · Creator quote</button>
+<button data-tab="affiliate" aria-selected="false">20 · Affiliate policy</button></nav>
+<div id="labs"></div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:24px 0">
+<button class="primary" id="export">Export scenario JSON</button><button id="reset">Reset assumptions</button>
+<small id="storage" style="color:#9dbbbc">Changes saved locally in this browser.</small></div>
+<footer>Educational simulation. No real business or customer data. Platform-attributed conversions do not establish incrementality. Calculations intentionally simplify real accounting and must not be treated as an investment recommendation.</footer>
+</main><script>
+(function(){
+'use strict';
+const specs={
+economics:{name:'Unit economics',description:'Model one unit per first-time customer. Prices include VAT; variable costs exclude recoverable taxes; no separately charged shipping. For simplicity, fully refunded goods are not resold.',
+fields:[['price','VAT-inclusive price',39,15,120,1,'€'],['discount','Discount',0,0,50,1,'%'],['vat','VAT rate',21,0,25,1,'%'],['cost','COGS, packaging, delivery',12.2,2,40,.1,'€'],['refund','Full-refund probability',5,0,25,1,'%'],['cac','All-in CAC',16.5,0,50,.5,'€']],
+metrics:[['e-revenue','Expected net revenue'],['e-cm1','CM1 before acquisition'],['e-cm2','CM2 after acquisition'],['e-ceiling','Break-even first-order CAC']],
+formula:'Expected ex-VAT revenue = (Price × (1 − Discount) / (1 + VAT)) × (1 − Refund Rate). CM1 = Revenue − Costs − Payment Fees − Expected Refund Handling. CM2 = CM1 − All-in CAC.'},
+creator:{name:'Creator quote underwriting',description:'A published video from a creator. Do not mistake followers for actual impressions. Content-license resale value is excluded until independently proven.',
+fields:[['fee','Video fee',1500,0,5000,100,'$'],['extras','Samples, rights and management',500,0,2000,50,'$'],['impressions','Expected impressions',100000,10000,500000,10000,''],['visit','Session rate / impression',1,.1,5,.1,'%'],['cvr','Website purchase CVR',2,.5,8,.25,'%'],['cm','CM1 / incremental order',25,5,100,1,'$'],['incrementality','Incremental order share',100,0,100,5,'%']],
+metrics:[['c-spend','All-in creator spend'],['c-orders','Expected incremental orders'],['c-profit','Incremental first-order CM2'],['c-impressions','Break-even impressions']],
+formula:'Incremental orders = Impressions × Site Session Rate × Purchase CVR × Incremental Share. CM2 = Incremental Orders × CM1 − All-in Creator Spend. Content-license value is not double counted.'},
+affiliate:{name:'Affiliate commission economics',description:'Commissionable revenue is after VAT, discounts and returns. CM1 is already net of product costs and discounts; never deduct the same discount twice.',
+fields:[['sales','Commissionable net sales',60,20,200,2,'$'],['affcm','CM1 before affiliate costs',26,0,90,1,'$'],['rate','Commission rate',20,0,40,1,'%'],['share','Truly incremental share',60,0,100,5,'%'],['afffee','Platform fee / attributed order',1,0,8,.25,'$'],['hurdle','Required retained contribution',12,0,25,1,'$']],
+metrics:[['a-payout','Commission payment'],['a-profit','Incremental CM after affiliate cost'],['a-max','Max payout at required profit'],['a-rate','Affordable commission ceiling']],
+formula:'Incremental contribution = CM1 × Incremental Share − Commissionable Sales × Commission Rate − Platform Fee. Maximum payout = max(0, Incremental CM1 − Fee − Retained Contribution Hurdle).'}
+};
+const defaults={};Object.values(specs).forEach(s=>s.fields.forEach(f=>defaults[f[0]]=f[2]));const key='dtc-growth-academy-labs-v1';let state={...defaults};
+try{const prior=JSON.parse(localStorage.getItem(key)||'{}');for(const k of Object.keys(defaults))if(Number.isFinite(prior[k]))state[k]=prior[k]}catch(e){}
+const usd=n=>(n<0?'−$':'$')+format(Math.abs(n));
+const eur=n=>(n<0?'−€':'€')+format(Math.abs(n));
+function format(x){return Number.isFinite(x)?new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(x):'N/A'}
+const val=(id,x)=>{let e=document.getElementById(id);if(e)e.textContent=x};
+const labs=document.getElementById('labs');
+for(const [type,lab] of Object.entries(specs)){
+ let section=document.createElement('section');section.id=type;section.className='grid';section.hidden=type!=='economics';
+ let inputs=document.createElement('div');inputs.className='panel';inputs.innerHTML='<div class="eyebrow">Interactive finance model</div><h2>'+lab.name+'</h2><p>'+lab.description+'</p>';
+ for(const f of lab.fields){
+   let label=document.createElement('label');label.textContent=f[1];let span=document.createElement('span');span.id='v-'+f[0];label.append(span);
+   let slider=document.createElement('input');slider.type='range';slider.min=f[3];slider.max=f[4];slider.step=f[5];slider.dataset.key=f[0];slider.value=state[f[0]];slider.addEventListener('input',()=>{state[f[0]]=Number(slider.value);render()});inputs.append(label,slider);
+ }
+ let outputs=document.createElement('div');outputs.className='panel';outputs.innerHTML='<div class="eyebrow">Commercial decision</div><h2>Investment threshold</h2>';
+ let grid=document.createElement('div');grid.className='metrics';for(const m of lab.metrics){let box=document.createElement('div');box.className='metric';let caption=document.createElement('small');caption.textContent=m[1];let strong=document.createElement('b');strong.id=m[0];box.append(caption,strong);grid.append(box)}outputs.append(grid);
+ let note=document.createElement('div');note.id=type+'-note';note.className='note';outputs.append(note);
+ if(type==='economics'){let h=document.createElement('h3');h.textContent='Contribution vs discount';outputs.append(h);let chart=document.createElement('div');chart.className='chart';chart.id='chart';outputs.append(chart)}
+ let explain=document.createElement('div');explain.className='formula';explain.textContent=lab.formula;outputs.append(explain);
+ section.append(inputs,outputs);labs.append(section);
+}
+function order(d){const gross=state.price*(1-d/100),refund=state.refund/100;
+const net=gross/(1+state.vat/100)*(1-refund);
+return{net:net,cm:net-state.cost-.35-gross*.02-refund*3}}
+function render(){
+ for(const [type,lab] of Object.entries(specs))for(const f of lab.fields){let display=f[6]==='%'?format(state[f[0]])+'%':f[6]+format(state[f[0]]);val('v-'+f[0],display)}
+ const o=order(state.discount),cm2=o.cm-state.cac;
+ val('e-revenue',eur(o.net));val('e-cm1',eur(o.cm));val('e-cm2',eur(cm2));val('e-ceiling',eur(Math.max(0,o.cm)));
+ document.getElementById('e-cm2').className=cm2>=0?'positive':'negative';
+ val('economics-note',cm2>=0?'First-order contribution covers acquisition under the inputs. Verify incrementality, inventory capacity, refund assumptions and the downside case before scaling.':'First-order acquisition loses money under the selected assumptions. Optimize costs, pricing and CAC, or obtain credible retention data before accepting a loss.');
+ let chart=document.getElementById('chart');chart.replaceChildren();let vals=[0,10,20,30,40].map(d=>({d:d,v:order(d).cm}));let m=Math.max(1,...vals.map(x=>Math.abs(x.v)));
+ for(let x of vals){let c=document.createElement('div');c.className='col';let v=document.createElement('span');v.textContent=eur(x.v);let bar=document.createElement('div');bar.className='bar';bar.style.height=Math.max(2,Math.abs(x.v)/m*95)+'px';bar.style.background=x.v<0?'#ffa397':'#6cddba';let name=document.createElement('span');name.textContent=x.d+'%';c.append(v,bar,name);chart.append(c)}
+ const spend=state.fee+state.extras,p=state.visit/100*state.cvr/100*state.incrementality/100,orders=state.impressions*p,cprofit=orders*state.cm-spend;
+ val('c-spend',usd(spend));val('c-orders',format(orders));val('c-profit',usd(cprofit));val('c-impressions',p?format(Math.ceil(spend/state.cm/p)):'Not possible');
+ document.getElementById('c-profit').className=cprofit>=0?'positive':'negative';
+ val('creator-note',cprofit>=0?'Simulated direct-sale hurdle passes. Check median post reach, audience, licensing, attribution and realistic P25 downside before approving the fee.':'Creator cost is not supported by forecast incremental sales. Negotiate, buy production-only rights, or design a lower-risk test. Do not invent brand-halo revenue.');
+ const payout=state.sales*state.rate/100,acm=state.affcm*state.share/100-payout-state.afffee,maximum=Math.max(0,state.affcm*state.share/100-state.afffee-state.hurdle);
+ val('a-payout',usd(payout));val('a-profit',usd(acm));val('a-max',usd(maximum));val('a-rate',format(100*maximum/state.sales)+'%');
+ document.getElementById('a-profit').className=acm>=state.hurdle?'positive':'negative';
+ val('affiliate-note',acm>=state.hurdle?'Proposed commission retains target contribution if the assumed lift is real. Test new-customer-only terms and enforce refund clawbacks.':'Proposed payout fails the retained contribution requirement. Test a lower rate, reduce coupon leakage, or prove the commission increase creates additional incremental orders.');
+ try{localStorage.setItem(key,JSON.stringify(state))}catch(e){val('storage','Browser storage unavailable. Export the scenario for backup.')}
+}
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-selected',String(x===b))});document.querySelectorAll('section.grid').forEach(s=>s.hidden=s.id!==b.dataset.tab)}));
+document.getElementById('reset').addEventListener('click',()=>{state={...defaults};render()});
+document.getElementById('export').addEventListener('click',()=>{let b=new Blob([JSON.stringify({product:'DTC Growth Academy',data:'synthetic training inputs',date:new Date().toISOString(),state:state},null,2)],{type:'application/json'});let url=URL.createObjectURL(b);let a=document.createElement('a');a.href=url;a.download='dtc-growth-scenario.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),500)});
+render();
+})();
+</script></body></html>
