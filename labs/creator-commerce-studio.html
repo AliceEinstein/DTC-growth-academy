@@ -1,0 +1,116 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Creator Commerce Studio | DTC Growth Academy</title><meta name="description" content="Five fictional interactive DTC creator economics labs: sourcing, UGC licensing, campaign delivery, attribution and affiliate tiers.">
+<style>
+:root{color-scheme:dark;background:#071d22;color:#effbf5;font:16px system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0}a{color:#8fe5c3;text-decoration:none}.wrap{max-width:1170px;margin:auto;padding:24px}
+header{border-bottom:1px solid #31555f}.top{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.brand{font-size:13px;letter-spacing:.09em;font-weight:850}.hero{padding:30px 0 8px}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#88e3c4}
+h1{font-size:clamp(35px,5vw,56px);margin:13px 0;line-height:1.06;letter-spacing:-.045em}h2{font-size:26px;margin:6px 0 12px}
+p{line-height:1.6;color:#b4cfca}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+button{font:inherit;cursor:pointer;border:1px solid #3c6970;border-radius:11px;background:#193d42;color:#e0f4ec;padding:12px 14px}
+button.active,button.primary{background:#83e5bd;color:#073329;border-color:#83e5bd;font-weight:750}
+.grid{display:grid;grid-template-columns:minmax(290px,1fr) minmax(290px,1.08fr);gap:15px}
+.panel{border:1px solid #2e545d;border-radius:17px;padding:22px;background:#14343b;min-width:0}
+label{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:14px;margin:13px 0 7px}label b{color:#f6fff9;font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:#86e6c1;cursor:pointer}
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.metric{border-radius:12px;background:#09262c;padding:16px}.metric small{display:block;color:#aac8c4;line-height:1.3}.metric strong{display:block;font-size:26px;margin-top:7px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.positive{color:#92e9b9}.negative{color:#ffa89a}.decision{margin-top:15px;padding:14px;border-left:3px solid #83e3bb;background:#1a3f44;line-height:1.6;border-radius:5px}
+.formula{font:12px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;color:#b5d1cd;border:1px solid #456a6c;border-radius:10px;padding:13px;margin-top:14px}
+[hidden]{display:none!important}.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0}
+small{color:#a8c3c1}footer{border-top:1px solid #30545c;margin-top:28px;padding:23px 0;font-size:12px;line-height:1.65;color:#9cb7b3}
+@media(max-width:825px){.wrap{padding:16px}.grid{grid-template-columns:1fr}.panel{padding:17px}.metric strong{font-size:22px}}
+</style></head><body><header><div class="wrap top"><span class="brand">◈ DTC GROWTH ACADEMY / CREATOR COMMERCE</span><a href="../index.html">← Main Labs</a></div></header>
+<main class="wrap"><div class="hero"><div class="eyebrow">Five commercial decision simulators · Days 15/17/18/19/21</div>
+<h1>Creator hype.<br>Or incremental profit?</h1><p>Change the assumptions behind hiring creators, licensing UGC, paying for publication, reconciling orders and raising affiliate commissions. Every value is synthetic; a model is never a real lift study.</p></div>
+<nav class="tabs" role="tablist" aria-label="Select creator commerce lab">
+<button role="tab" class="active" aria-selected="true" data-tab="sourcing">15 · Sourcing</button>
+<button role="tab" aria-selected="false" data-tab="ugc">17 · UGC rights</button>
+<button role="tab" aria-selected="false" data-tab="ops">18 · Campaign ops</button>
+<button role="tab" aria-selected="false" data-tab="attribution">19 · Attribution</button>
+<button role="tab" aria-selected="false" data-tab="affiliate">21 · Affiliate tiers</button></nav><div id="labs"></div>
+<div class="tools"><button class="primary" id="export">Export synthetic inputs</button><button id="reset">Reset scenario</button><small id="storage">Inputs saved in your browser when supported.</small></div>
+<footer>Fictional teaching data; no customer records, analytics, personal identifiers or external scripts. Real decisions require signed paid-use rights, merchant order reconciliation, refunds, local advertising disclosures and defensible incremental-customer measurement.</footer></main>
+<script>
+(()=>{'use strict';
+const specs={
+sourcing:{title:'Choose audience fit, not follower count',intro:'This creator has 25k fictional followers. Change median views, country fit and true incrementality, then decide whether the $900 package is defensible.',fields:[
+['sc_views','Median video views',90000,5000,300000,5000,''],['sc_geo','Target-market audience',85,10,100,5,'%'],['sc_overlap','Audience duplication haircut',15,0,80,5,'%'],
+['sc_visit','Qualified view → site visit',1.8,.1,6,.1,'%'],['sc_cvr','Site visit → purchase',5,.5,12,.5,'%'],['sc_incremental','Incremental new-order share (unverified)',80,0,100,5,'%'],
+['sc_cm1','First-order CM1',25,5,80,1,'$'],['sc_fee','Creator all-in fee',900,100,3000,50,'$']],
+metrics:[['sc_quality','Qualified median views'],['sc_new','Proxy incremental new orders'],['sc_required','Break-even median views'],['sc_profit','Proxy CM2']],
+formula:'Qualified views = median × country fit × (1 − audience overlap). Incremental new orders = qualified views × click-to-site rate × site CVR × incremental fraction. CM2 = incremental buyers × first-order CM1 − all-in creator fee. These rates are not proven.'},
+ugc:{title:'UGC production & paid-rights economics',intro:'Buying files is different from buying rights. Test whether lower new-customer CAC can pay back a six-month production package.',fields:[
+['ug_production','Production cost',1150,100,3500,50,'€'],['ug_rights','Paid-use license fee',300,0,2000,50,'€'],['ug_other','Edits / samples',150,0,1000,25,'€'],
+['ug_months','License valid months',6,0,24,1,''],['ug_buyers','Incremental new buyers / month (forecast)',200,0,1500,25,''],
+['ug_saving','CAC savings per new buyer (UNVERIFIED)',2.25,0,12,.25,'€'],['ug_allowed','Paid rights legally cleared (1=yes)',1,0,1,1,'']],
+metrics:[['ug_cost','All-in asset spend'],['ug_breakeven','Break-even incremental buyers'],['ug_benefit','Hypothetical CAC savings'],['ug_profit','Net asset value']],
+formula:'Savings = monthly genuinely new buyers × valid license months × experimentally measured iCAC improvement. Net asset value = savings − asset cost. Lack of paid-use authorization blocks paid-media use regardless of modeled returns.'},
+ops:{title:'Campaign delivery + complete cost',intro:'A signed contract and actual publication must clear before forecast impressions are treated as a real campaign. Model below is conditional, not an executed campaign.',fields:[
+['op_views','Forecast qualified impressions',150000,0,500000,5000,''],['op_visit','View → site visit',1.8,.1,6,.1,'%'],['op_cvr','Visit → paid order',3,.5,10,.5,'%'],
+['op_new','New-customer fraction',85,0,100,5,'%'],['op_increment','True incremental share (hyp.)',70,0,100,5,'%'],['op_cm','CM1 / incremental new buyer',26,5,90,1,'€'],
+['op_fixed','Creator posting fee',600,0,3500,50,'€'],['op_media','Media spend',300,0,2500,50,'€'],['op_rights','Rights fee',200,0,2000,50,'€'],['op_samples','Samples + shipping',100,0,600,25,'€'],
+['op_codeorders','Code-attributed orders for commission',25,0,300,5,''],['op_netbase','Net commissionable sale/order',60,20,150,5,'€'],['op_rate','Commission percentage',10,0,35,1,'%'],
+['op_contract','Contract signed (1=yes)',1,0,1,1,''],['op_post','Published & accepted (1=yes)',1,0,1,1,'']],
+metrics:[['op_ordersout','Proxy incremental new orders'],['op_cashout','All-in cash inc. commission'],['op_profitout','Proxy CM2'],['op_gateout','Delivery gate']],
+formula:'New orders = forecast qualified impressions × visit rate × purchase rate × new fraction × incremental share. All-in = creator + media + rights + samples + code orders × net commissionable/order × commission% × 1.029 payment factor (Collabs example only). Contract and publication are mandatory gates.'},
+attribution:{title:'Claims ≠ paid orders ≠ new customers',intro:'One creator may receive overlapping credit from discount codes, Google and paid social. Start with the payment ledger and then estimate a defensible counterfactual.',fields:[
+['at_claims','Platform conversion claims',80,0,300,5,''],['at_ledger','Distinct ledger orders matched',55,0,250,5,''],['at_new','New-to-file buyers',35,0,200,5,''],
+['at_increment','True incremental share (unverified)',60,0,100,5,'%'],['at_cm','CM1 / true incremental first buyer',30,5,80,1,'€'],['at_creator','Creator flat',900,0,3000,50,'€'],
+['at_rights','Paid rights',250,0,1500,50,'€'],['at_samples','Samples / operations',100,0,800,25,'€'],['at_media','Paid boost',400,0,3000,50,'€'],
+['at_code','Code-attributed orders',45,0,180,5,''],['at_base','Net commissionable sale/order',60,20,100,5,'€'],['at_rate','Affiliate commission',15,0,35,1,'%']],
+metrics:[['at_overlap','Platform minus ledger claims'],['at_buyers','Proxy genuinely new buyers'],['at_cost','Cash costs incl commission'],['at_profit','Proxy CM2']],
+formula:'Code payouts = code orders × net commissionable sales × commission rate × 1.029. Platform conversions may overlap; first-order contribution is new-to-file × hypothesized true-incremental share × CM1. A platform claim count never substitutes for order IDs.'},
+affiliate:{title:'Should a 15% partner move to 20%?',intro:'Compare previous partner contribution with a hypothetical higher-rate month; a favorable modeled forecast does not establish that the rate increase caused new business.',fields:[
+['af_oldorders','Prior attributed orders',100,20,600,10,''],['af_neworders','Forecast next orders',135,20,800,5,''],
+['af_oldincr','Prior incremental share (assumption)',85,0,100,5,'%'],['af_newincr','Forecast incremental share (assumption)',90,0,100,5,'%'],
+['af_cm','CM1 / attributable incremental order',26,5,75,1,'$'],['af_net','Net commissionable sales',60,20,150,5,'$'],
+['af_oldrate','Old commission rate',15,0,40,1,'%'],['af_newrate','Proposed commission',20,0,40,1,'%'],
+['af_fixed','Next-tier extra fixed fee',0,0,1200,50,'$'],['af_floor','Min retained CM / attributed order',8,0,35,1,'$']],
+metrics:[['af_prior','Old monthly proxy contribution'],['af_next','New monthly proxy contribution'],['af_delta','Modeled incremental change'],['af_max','Max rate under floor']],
+formula:'Prior CM = old orders × old incremental share × CM1 − old orders × net sales × old rate × 1.029. New CM = forecast orders × forecast incremental share × CM1 − forecast orders × net sales × new rate × 1.029 − new fixed fee. Incremental lift must be causally tested, not assumed.'}
+};
+const initial={};for(const s of Object.values(specs))for(const f of s.fields)initial[f[0]]=f[2];
+let v={...initial};const storageKey='dtc-creator-commerce-v1';
+try{const p=JSON.parse(localStorage.getItem(storageKey)||'{}');for(const k of Object.keys(initial))if(Number.isFinite(p[k]))v[k]=p[k]}catch(e){}
+const host=document.getElementById('labs');const fmt=new Intl.NumberFormat('en-US',{maximumFractionDigits:2});
+const num=n=>Number.isFinite(n)?fmt.format(n):'N/A',money=(n,c)=>((n<0?'−':'')+c+num(Math.abs(n)));
+const set=(id,t)=>{const el=document.getElementById(id);if(el)el.textContent=t};
+const tone=(id,ok)=>{const el=document.getElementById(id);if(el)el.className=ok?'positive':'negative'};
+for(const [key,s] of Object.entries(specs)){
+ const section=document.createElement('section');section.id=key;section.className='grid';section.hidden=key!=='sourcing';
+ const left=document.createElement('div');left.className='panel';const ey=document.createElement('div');ey.className='eyebrow';ey.textContent='Commercial assumptions';const h=document.createElement('h2');h.textContent=s.title;const p=document.createElement('p');p.textContent=s.intro;left.append(ey,h,p);
+ for(const f of s.fields){const label=document.createElement('label');const t=document.createElement('span');t.textContent=f[1];const out=document.createElement('b');out.id='v-'+f[0];label.append(t,out);const inp=document.createElement('input');inp.type='range';inp.min=f[3];inp.max=f[4];inp.step=f[5];inp.value=v[f[0]];inp.dataset.input=f[0];inp.setAttribute('aria-label',f[1]);inp.addEventListener('input',()=>{v[f[0]]=Number(inp.value);render()});left.append(label,inp)}
+ const right=document.createElement('div');right.className='panel';const outlabel=document.createElement('div');outlabel.className='eyebrow';outlabel.textContent='Budget underwriting';const h2=document.createElement('h2');h2.textContent='Commercial result';right.append(outlabel,h2);const grid=document.createElement('div');grid.className='metrics';
+ for(const [id,title] of s.metrics){const card=document.createElement('div');card.className='metric';const small=document.createElement('small');small.textContent=title;const strong=document.createElement('strong');strong.id=id;card.append(small,strong);grid.append(card)}
+ right.append(grid);const note=document.createElement('div');note.className='decision';note.id='note-'+key;const formula=document.createElement('div');formula.className='formula';formula.textContent=s.formula;right.append(note,formula);section.append(left,right);host.append(section);
+}
+function render(){
+ for(const s of Object.values(specs))for(const f of s.fields)set('v-'+f[0],f[6]==='%'?num(v[f[0]])+'%':f[6]+num(v[f[0]]));
+ const quality=v.sc_views*v.sc_geo/100*(1-v.sc_overlap/100),buyers=quality*v.sc_visit/100*v.sc_cvr/100*v.sc_incremental/100;
+ const p1=buyers*v.sc_cm1-v.sc_fee;const denominator=v.sc_geo/100*(1-v.sc_overlap/100)*v.sc_visit/100*v.sc_cvr/100*v.sc_incremental/100*v.sc_cm1;
+ set('sc_quality',num(quality));set('sc_new',num(buyers));set('sc_required',denominator>0?num(Math.ceil(v.sc_fee/denominator)):'Undefined');set('sc_profit',money(p1,'$'));tone('sc_profit',p1>=0);
+ set('note-sourcing',p1>=0?'Possible pilot under these hypothetical traffic assumptions. Verify median sponsored reach and country distribution before signing.':'Do not use follower count to excuse negative first-order incremental economics. Negotiate, request evidence or reject.');
+ const assetCost=v.ug_production+v.ug_rights+v.ug_other,savings=v.ug_months*v.ug_buyers*v.ug_saving,p2=savings-assetCost;
+ set('ug_cost',money(assetCost,'€'));set('ug_breakeven',v.ug_saving>0?num(Math.ceil(assetCost/v.ug_saving)):'Undefined');set('ug_benefit',money(savings,'€'));set('ug_profit',money(p2,'€'));tone('ug_profit',p2>=0&&v.ug_allowed===1);
+ set('note-ugc',v.ug_allowed!==1?'BLOCK. Paid-use permission is missing. An organic video or Spark code alone is not a permanent cross-platform production license.':p2>=0?'Potential asset value if rights really cover the period and incremental CAC savings are proven by a controlled experiment.':'Asset spend is not covered by the estimated savings. Request a shorter/cheaper license or improve evidence.');
+ const opOrders=v.op_views*v.op_visit/100*v.op_cvr/100*v.op_new/100*v.op_increment/100,opCash=v.op_fixed+v.op_media+v.op_rights+v.op_samples+v.op_codeorders*v.op_netbase*v.op_rate/100*1.029,opCm=opOrders*v.op_cm-opCash,opGate=v.op_contract===1&&v.op_post===1;
+ set('op_ordersout',num(opOrders));set('op_cashout',money(opCash,'€'));set('op_profitout',money(opCm,'€'));tone('op_profitout',opCm>=0&&opGate);set('op_gateout',opGate?'Eligible':'BLOCK');
+ set('note-ops',!opGate?'Campaign not approved: signed contract and verified publication are mandatory. Forecast impressions are NOT delivered impressions.':opCm>=0?'Proceed only as monitored pilot; verify the spend, rights, ledger and actual new orders.':'Renegotiate the contract, cap spend or stop. Commission is payable on attributed code orders even if those buyers are not truly incremental.');
+ const discrepancy=v.at_claims-v.at_ledger,atBuyer=v.at_new*v.at_increment/100,atCost=v.at_creator+v.at_rights+v.at_samples+v.at_media+v.at_code*v.at_base*v.at_rate/100*1.029,atCm=atBuyer*v.at_cm-atCost;
+ set('at_overlap',(discrepancy>=0?'+':'')+num(discrepancy));set('at_buyers',num(atBuyer));set('at_cost',money(atCost,'€'));set('at_profit',money(atCm,'€'));tone('at_profit',atCm>=0);
+ set('note-attribution',v.at_new>v.at_ledger||v.at_code>v.at_ledger?'Review input consistency: unique new-to-file buyers or code orders exceed matched distinct ledger orders. Investigate before interpreting.':atCm>=0?'Contribution can be positive as a proxy. Validate real incrementality and avoid adding code claims to platform-attributed orders.':'Platform claims, coupon orders, distinct ledger orders and new customers are different metrics. Attribution revenue cannot justify the all-in spend.');
+ const oldOrders=v.af_oldorders,newOrders=v.af_neworders,oldRate=v.af_oldrate/100,newRate=v.af_newrate/100;
+ const oldCm=oldOrders*v.af_oldincr/100*v.af_cm-oldOrders*v.af_net*oldRate*1.029;
+ const newCm=newOrders*v.af_newincr/100*v.af_cm-newOrders*v.af_net*newRate*1.029-v.af_fixed;
+ const maxRate=(newOrders>0&&v.af_net>0)?Math.max(0,((v.af_newincr/100)*v.af_cm-v.af_floor-v.af_fixed/newOrders)/(v.af_net*1.029))*100:0;
+ set('af_prior',money(oldCm,'$'));set('af_next',money(newCm,'$'));set('af_delta',money(newCm-oldCm,'$'));set('af_max',num(maxRate)+'%');tone('af_delta',newCm>=oldCm&&newRate*100<=maxRate);
+ set('note-affiliate',newCm<oldCm?'REJECT tier upgrade: modeled total incremental contribution falls despite increased attributed volume.':newRate*100>maxRate?'Do not raise the commission: the required contribution floor is breached.':'Model supports a limited 30-day test only. Orders and true incremental share may not actually rise because of the commission change.');
+ try{localStorage.setItem(storageKey,JSON.stringify(v))}catch(e){set('storage','Browser storage unavailable; export your assumptions.')}
+}
+for(const button of document.querySelectorAll('[data-tab]'))button.addEventListener('click',()=>{for(const b of document.querySelectorAll('[data-tab]')){b.classList.toggle('active',b===button);b.setAttribute('aria-selected',String(b===button))}for(const section of host.children)section.hidden=section.id!==button.dataset.tab});
+document.getElementById('reset').addEventListener('click',()=>{v={...initial};for(const el of document.querySelectorAll('[data-input]'))el.value=v[el.dataset.input];render()});
+document.getElementById('export').addEventListener('click',()=>{const b=new Blob([JSON.stringify({study:'DTC Growth Academy',dataType:'fictional training inputs only',exportTime:new Date().toISOString(),inputs:v},null,2)],{type:'application/json'});const url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='creator-economics-synthetic.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),400)});
+render();
+})();
+</script></body></html>
