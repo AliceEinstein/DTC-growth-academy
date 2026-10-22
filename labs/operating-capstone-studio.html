@@ -1,0 +1,132 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Growth Operator Final Studio | DTC Growth Academy</title><meta name="description" content="Nine interactive fictional DTC financial operator scenarios: retention, CRM, organic, inventory, CRO, channel allocation, AI stack, CFO and capstone.">
+<style>
+:root{color-scheme:dark;background:#091b23;color:#e9f7f1;font:16px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0}a{color:#8ce6c3;text-decoration:none}.wrap{max-width:1140px;margin:0 auto;padding:20px}
+header{border-bottom:1px solid #31545d}.top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.brand{font-size:13px;letter-spacing:.13em;font-weight:850}.eyebrow{text-transform:uppercase;font-size:12px;letter-spacing:.12em;color:#88dbbc}
+.hero{padding:29px 0 12px}h1{font-size:clamp(34px,5vw,57px);line-height:1.07;letter-spacing:-.05em;margin:15px 0}h2{font-size:25px;margin:5px 0 12px}
+p{line-height:1.6;color:#acc8c7}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+button{font:inherit;cursor:pointer;background:#173b43;border:1px solid #3d6770;color:#edf7f2;border-radius:10px;padding:10px 12px}
+button.active,button.primary{background:#80e2be;color:#063329;border-color:#80e2be;font-weight:750}
+.grid{display:grid;grid-template-columns:minmax(290px,1fr) minmax(290px,1.05fr);gap:16px}
+.panel{background:#12343d;border:1px solid #30575e;border-radius:16px;padding:22px;min-width:0}
+label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14px;margin:15px 0 6px}
+label b{font-variant-numeric:tabular-nums;color:#f0fff6;text-align:right}
+input[type=range]{accent-color:#84e8be;cursor:pointer;width:100%}
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.metric{padding:15px;background:#08252c;border-radius:12px}.metric small{display:block;color:#a8c5c4}
+.metric strong{display:block;font-variant-numeric:tabular-nums;font-size:26px;margin-top:8px;overflow-wrap:anywhere}
+.profit{color:#8aefb7}.loss{color:#ffb3a5}.note{border-left:3px solid #8aebc0;background:#173e43;padding:14px;margin-top:15px;line-height:1.6}
+.formula{font:12px/1.7 ui-monospace,Consolas,monospace;border:1px solid #466870;padding:12px;border-radius:9px;color:#b6d1cf;margin-top:13px}
+[hidden]{display:none!important}footer{border-top:1px solid #31545d;margin-top:24px;padding:20px 0;color:#9abbbb;font-size:12px;line-height:1.55}
+@media(max-width:820px){.grid{grid-template-columns:1fr}.wrap{padding:16px}.panel{padding:17px}.metric strong{font-size:22px}}
+</style></head><body>
+<header><div class="wrap top"><span class="brand">◈ DTC GROWTH ACADEMY / OPERATING SIMULATION</span><a href="../index.html">← All Labs</a></div></header>
+<main class="wrap"><div class="hero"><div class="eyebrow">Final operator labs · Days 22–30</div><h1>Can the business<br>actually fund growth?</h1>
+<p>Nine interactive practice decisions across retention, CRM, organic, inventory, CRO, media allocation, automation, CFO spend gates and the final 90-day plan. Fictional numbers. Test the sensitivity; no channel here has measured causal impact.</p></div>
+<nav class="tabs" role="tablist" aria-label="Choose operating lab">
+<button class="active" aria-selected="true" role="tab" data-tab="cohort">22 · Cohort</button>
+<button aria-selected="false" role="tab" data-tab="crm">23 · Lifecycle</button>
+<button aria-selected="false" role="tab" data-tab="organic">24 · Organic</button>
+<button aria-selected="false" role="tab" data-tab="inventory">25 · Inventory</button>
+<button aria-selected="false" role="tab" data-tab="cro">26 · CRO</button>
+<button aria-selected="false" role="tab" data-tab="channels">27 · Channel Mix</button>
+<button aria-selected="false" role="tab" data-tab="tools">28 · Lean Ops</button>
+<button aria-selected="false" role="tab" data-tab="cfo">29 · CFO Gate</button>
+<button aria-selected="false" role="tab" data-tab="capstone">30 · Capstone</button></nav>
+<div id="labs"></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;align-items:center">
+<button class="primary" id="export">Export model inputs</button><button id="reset">Reset simulations</button><small id="storage">Values saved locally when available.</small></div>
+<footer>All customers, products, rates, costs and forecast cases are synthetic. Profit proxies assume incremental effects that have NOT been proven. No network calls, customer identity collection or analytics. Test refunds, stock, tax, rights and causality before spending actual funds.</footer>
+</main><script>
+(()=>{'use strict';
+const specs={
+cohort:{title:'Cohort contribution and CAC payback',intro:'Do not use a predicted 180-day LTV as spendable cash. This example is 90-day first-order plus repeat contribution.',f:[
+['co_first','First order CM1',24,5,80,1,'€'],['co_repeat','Repeat orders/new buyer by 90d',.2,0,1,.02,''],['co_recm','CM1 per repeat order',19,5,80,1,'€'],['co_cac','All-in new customer acquisition CAC',27,5,90,1,'€'],['co_age','Months observed',6,0,9,1,'']],
+out:[['co_ltv','90d CM per buyer'],['co_net','90d after CAC'],['co_revenue','100 new buyers contribution'],['co_status','Cohort decision']],
+formula:'LTV90 = first-order CM1 + repeat orders / first buyer × repeat-order CM1. Payback = LTV90 − full iCAC. Under 3 months, treat 90-day performance as immature rather than proven.'},
+crm:{title:'Lifecycle: revenue attribution ≠ profit',intro:'A discount can reward all orders, including those that would have happened anyway. Test the true incremental order-rate difference.',f:[
+['cr_people','Consented eligible profiles',3000,200,10000,100,''],['cr_control','Control purchase rate',3,0,30,.5,'%'],['cr_treat','Treatment purchase rate',3.8,0,30,.2,'%'],['cr_cm','CM1/order before extra incentive',23,5,70,1,'€'],['cr_reward','Extra incentive per treatment order',3,0,15,.5,'€'],['cr_send','Cash send fee per profile',.03,0,1,.01,'€'],['cr_setup','Creative/flow fixed fee',100,0,900,25,'€'],['cr_consent','Messaging permission gate (1=yes)',1,0,1,1,'']],
+out:[['cr_incr','Proxy incremental orders'],['cr_cost','Total flow spend'],['cr_profit','Proxy flow CM2'],['cr_gate','Send gate']],
+formula:'Incremental orders = eligible × (treatment rate − control rate). Flow costs include incentive × ALL treatment orders + send cost × audience + creative fixed. Model never proves attribution or legal consent.'},
+organic:{title:'Organic is not a free channel',intro:'Model cash-only economics separately from the economic value of owner hours.',f:[
+['or_hours','Owner production hours / month',20,0,80,2,''],['or_hourly','Owner time opportunity value',40,0,150,5,'€'],['or_cash','Direct editing / seeding cash',120,0,1300,20,'€'],['or_orders','Distinct attributed orders',22,0,150,2,''],['or_inc','True incremental share (hypothesis)',60,0,100,5,'%'],['or_cm','CM1/order',28,5,100,1,'€']],
+out:[['or_incr','Expected new orders'],['or_cashresult','Cash-only CM2'],['or_fullresult','CM2 incl time opportunity'],['or_cost','Economic channel cost']],
+formula:'Proxy contribution = distinct paid orders × hypothesized incrementality × net contribution / order. Cash CM2 = contribution − cash. Economic CM2 further deducts owner hours × opportunity value.'},
+inventory:{title:'SKU reorder and working-capital gate',intro:'High product margin is not a license to spend when stock is reserved and supplier cash is due.',f:[
+['in_stock','On-hand physical units',240,0,1300,10,''],['in_reserved','Already committed units',15,0,350,5,''],['in_week','Demand / week',50,0,150,5,''],['in_lead','Supplier lead time weeks',5,0,16,1,''],['in_safety','Safety-stock units',35,0,250,5,''],['in_moq','Supplier minimum order',300,0,1200,50,''],['in_cost','Landed cash / unit',8,1,80,1,'€'],['in_cash','Current bank cash',3600,0,30000,200,'€'],['in_due','Other committed cash due',800,0,15000,100,'€']],
+out:[['in_rop','Reorder point (units)'],['in_position','Inventory position'],['in_headroom','Cash after MOQ & obligations'],['in_gate','Launch decision']],
+formula:'Reorder point = weekly demand × lead weeks + safety units. Sellable inventory position = on hand − reserved. Cash headroom = bank cash − prior obligations − MOQ × landed unit cost. Stock purchase cash is not identical to P&L COGS.'},
+cro:{title:'Experiment: +CVR can mean less contribution',intro:'AOV or CVR wins do not authorize rollouts if the fully burdened margin per visitor falls.',f:[
+['cx_sessions','Eligible sessions / arm',5000,500,40000,500,''],['cx_corders','Control orders',150,10,1200,10,''],['cx_torders','Treatment orders',168,10,1200,10,''],['cx_ccm','Control CM1 / order',24,5,70,1,'€'],['cx_tcm','Treatment CM1 / order',17,5,70,1,'€'],['cx_fixed','One-off test costs',200,0,3000,50,'€']],
+out:[['cx_lift','Observed relative CVR lift'],['cx_control','Control CM per eligible visitor'],['cx_treat','Treatment CM per eligible visitor'],['cx_delta','Delta CM per visitor']],
+formula:'Purchase rate = paid orders / all eligible users. CM/visitor for treatment=(treatment orders × treatment CM/order − test fixed cost)/eligible sessions. This is a point estimate, NOT a statistical confidence interval.'},
+channels:{title:'What should the next €1,000 buy?',intro:'Use marginal incremental profit, not the highest platform-attributed ROAS.',f:[
+['ch_spend','New paid media block',1000,100,10000,100,'€'],['ch_buyers','Proxy genuine new buyers',60,0,400,5,''],['ch_cm','CM1/new buyer',28,5,100,1,'€'],['ch_rights','Extra rights and production',100,0,2000,50,'€'],['ch_platform','Attributed platform ROAS',4.2,0,20,.5,'x'],['ch_stock','Rights & stock eligible (1=yes)',1,0,1,1,'']],
+out:[['ch_cash','All-in new spend'],['ch_icac','Proxy incremental CAC'],['ch_profit','Proxy next-block CM2'],['ch_gate','Scale gate']],
+formula:'Incremental buyers must be from credible holdout/response design; platform ROAS is displayed to expose misleading rankings, not used in incremental CM2.'},
+tools:{title:'Make, buy, or automate?',intro:'Time saved is an opportunity value, not cash deposited in your bank account.',f:[
+['tl_price','Monthly SaaS cash',120,0,600,20,'€'],['tl_maint','Maintenance hours / week',2,0,10,.5,''],['tl_saved','Verified hours saved / week',6,0,14,.5,''],['tl_hourly','Operator opportunity value / hour',40,10,100,5,'€'],['tl_setup','Setup hours',12,0,60,1,''],['tl_amort','Amortization months',6,1,24,1,''],['tl_new','Extra truly new buyers / month (hyp.)',7,0,40,1,''],['tl_cm','CM1 / new buyer',24,5,90,1,'€'],['tl_access','Consent/privacy/access gate (1=yes)',1,0,1,1,'']],
+out:[['tl_cost','Total economic cost / month'],['tl_saving','Time opportunity saved'],['tl_profit','Net modeled economic value'],['tl_gate','Buy / block']],
+formula:'Monthly economic cost = subscription + (setup hours/amortization + maintenance h/week×4)×opportunity/hour. Benefit = verified saved h/week×4×rate + truly new buyers×CM1. Privacy gate overrides numbers.'},
+cfo:{title:'CFO cash gate before an incremental experiment',intro:'Your total cash is NOT fully available marketing budget. Never use expected 90-day profit as today’s bank liquidity.',f:[
+['cf_bank','Bank cash now',7000,0,25000,500,'€'],['cf_floor','Protected cash reserve',2500,0,10000,500,'€'],['cf_prev','Already committed deposits',1600,0,12000,100,'€'],['cf_project','New project all-in commitment',1200,0,10000,100,'€'],['cf_new','Forecast true incremental buyers',45,0,300,5,''],['cf_cm','CM1/true buyer',25,5,80,1,'€'],['cf_conf','Forecast realization fraction (hyp.)',55,0,100,5,'%'],['cf_eligible','Stock / rights gate (1=yes)',1,0,1,1,'']],
+out:[['cf_headroom','Cash available after commitments'],['cf_expected','Full forecast CM2'],['cf_risk','Haircut forecast CM2'],['cf_gate','Approval gate']],
+formula:'Cash headroom = bank − reserve − existing commitments − next project cash cost. Risk value = forecast true buyers × realization fraction × CM1 − project cost. This is scenario sensitivity, not a statistically calibrated confidence interval.'},
+capstone:{title:'A 90-day growth plan must fund itself',intro:'Do not use full 90-day contribution as immediate working capital. Plan phase cash and subtract reserved liquidity.',f:[
+['cp_bank','Bank cash',8000,0,25000,500,'€'],['cp_reserve','Liquidity reserved',3000,0,12000,500,'€'],['cp_d1','Days 1–30 marketing spend',300,0,4000,100,'€'],['cp_d2','Days 31–60 marketing spend',100,0,4000,100,'€'],['cp_d3','Days 61–90 marketing spend',0,0,4000,100,'€'],['cp_rights','Upfront stock / rights cash',0,0,6000,100,'€'],['cp_buyers','Proxy extra paid customers over 90 days',24,0,250,2,''],['cp_cm','CM1/true extra buyer',26,5,100,1,'€'],['cp_available','Inventory & rights eligibility (1=yes)',1,0,1,1,'']],
+out:[['cp_budget','Cash deployable above reserve'],['cp_spend','90d proposed total spend'],['cp_cm2','90d hypothetical incremental CM2'],['cp_gate','Plan decision']],
+formula:'Operating cash capacity = bank − protected reserve. Total committed spend = all phase spends + upfront rights/stock. 90-day CM2 = true incremental buyers×CM1 − cash spend; this model does not treat future CM2 as cash before it is collected.'}
+};
+const stateKey="dtc-operator-days22-30-v1",defaults={};for(const s of Object.values(specs))for(const f of s.f)defaults[f[0]]=f[2];
+let values={...defaults};try{const stored=JSON.parse(localStorage.getItem(stateKey)||'{}');for(const k of Object.keys(defaults))if(Number.isFinite(stored[k]))values[k]=stored[k]}catch(e){}
+const box=document.getElementById('labs');const nf=new Intl.NumberFormat('en-US',{maximumFractionDigits:2});
+const fmt=x=>Number.isFinite(x)?nf.format(x):'N/A', money=x=>(x<0?'−€':'€')+fmt(Math.abs(x));
+const renderVal=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
+const flag=(id,b)=>{const e=document.getElementById(id);if(e)e.className=b?'profit':'loss'};
+for(const [id,s] of Object.entries(specs)){
+ const section=document.createElement('section');section.className='grid';section.id=id;section.hidden=id!=='cohort';
+ const left=document.createElement('div');left.className='panel';const over=document.createElement('div');over.className='eyebrow';over.textContent='Editable scenario assumptions';
+ const h=document.createElement('h2');h.textContent=s.title;const intro=document.createElement('p');intro.textContent=s.intro;left.append(over,h,intro);
+ for(const f of s.f){const label=document.createElement('label');const txt=document.createElement('span');txt.textContent=f[1];const val=document.createElement('b');val.id='v-'+f[0];label.append(txt,val);const input=document.createElement('input');input.type='range';input.min=f[3];input.max=f[4];input.step=f[5];input.value=values[f[0]];input.dataset.input=f[0];input.setAttribute('aria-label',f[1]);input.addEventListener('input',()=>{values[f[0]]=Number(input.value);calculate()});left.append(label,input)}
+ const right=document.createElement('div');right.className='panel';const eyebrow=document.createElement('div');eyebrow.className='eyebrow';eyebrow.textContent='Decision results';const hh=document.createElement('h2');hh.textContent='Operating gate';right.append(eyebrow,hh);
+ const metrics=document.createElement('div');metrics.className='metrics';for(const [key,title] of s.out){const card=document.createElement('div');card.className='metric';const small=document.createElement('small');small.textContent=title;const strong=document.createElement('strong');strong.id=key;card.append(small,strong);metrics.append(card)}
+ right.append(metrics);const note=document.createElement('div');note.className='note';note.id='note-'+id;const formula=document.createElement('div');formula.className='formula';formula.textContent=s.formula;right.append(note,formula);section.append(left,right);box.append(section);
+}
+function calculate(){
+ const v=values;for(const s of Object.values(specs))for(const f of s.f)renderVal('v-'+f[0],f[6]==='%'?fmt(v[f[0]])+'%':f[6]+fmt(v[f[0]]));
+ const cltv=v.co_first+v.co_repeat*v.co_recm, cnet=cltv-v.co_cac, mature=v.co_age>=3;
+ renderVal('co_ltv',money(cltv));renderVal('co_net',money(cnet));renderVal('co_revenue',money(cltv*100));renderVal('co_status',!mature?'IMMATURE':cnet>=0?'Pilot / verify':'No scale');flag('co_net',mature&&cnet>=0);
+ renderVal('note-cohort',mature?(cnet>=0?'Observed maturity window could be adequate; validate cohort, refunds and future retention spend.':'First-order plus repeat contribution does not cover all-in customer acquisition cost.'):'This acquisition cohort is younger than 90 days. It cannot have a mature 90-day measured contribution. All expected repeat orders are hypotheses.');
+ const added=v.cr_people*(v.cr_treat-v.cr_control)/100, treatment=v.cr_people*v.cr_treat/100,send=v.cr_people*v.cr_send+v.cr_setup+treatment*v.cr_reward,crm=added*v.cr_cm-send;
+ renderVal('cr_incr',fmt(added));renderVal('cr_cost',money(send));renderVal('cr_profit',money(crm));renderVal('cr_gate',v.cr_consent===1?'Permitted':'BLOCK');flag('cr_profit',crm>=0&&v.cr_consent===1);
+ renderVal('note-crm',v.cr_consent!==1?'BLOCK: marketing consent and suppression are required before commercial flows are sent.':crm>=0?'Small positive proxy: only expand after a holdout verifies genuine extra purchases and refunds.':'A better attributed order rate can still lose cash after incentives, sends and implementation.');
+ const orders=v.or_orders*v.or_inc/100,base=orders*v.or_cm,cash=base-v.or_cash,full=cash-v.or_hours*v.or_hourly;
+ renderVal('or_incr',fmt(orders));renderVal('or_cashresult',money(cash));renderVal('or_fullresult',money(full));renderVal('or_cost',money(v.or_cash+v.or_hours*v.or_hourly));flag('or_fullresult',full>=0);
+ renderVal('note-organic',full>=0?'Positive proxy including owner-hour opportunity value. Test if attention creates genuine paid orders.':'Organic content may still be useful for product education, but separate intangible learning from cash profit and do not invent EMV as revenue.');
+ const sellable=v.in_stock-v.in_reserved,rop=v.in_week*v.in_lead+v.in_safety,headroom=v.in_cash-v.in_due-v.in_moq*v.in_cost;
+ renderVal('in_rop',fmt(rop));renderVal('in_position',fmt(sellable));renderVal('in_headroom',money(headroom));renderVal('in_gate',headroom<0?'BLOCK CASH':sellable<rop?'Reorder / limit':'Review stock');flag('in_headroom',headroom>=0);
+ renderVal('note-inventory',headroom<0?'Inventory financing or supplier payment terms need resolution before paid launch.':sellable<rop?'Stock is below lead-time demand plus safety buffer; a viral creator post can cause an unfulfillable spike.':'Stock position may be sufficient for now, but recheck SKU variants and launch-date commitments.');
+ const ctrl=v.cx_corders/v.cx_sessions,treat=v.cx_torders/v.cx_sessions,cctrl=ctrl*v.cx_ccm,ctreat=(v.cx_torders*v.cx_tcm-v.cx_fixed)/v.cx_sessions,change=ctreat-cctrl;
+ renderVal('cx_lift',(ctrl?fmt((treat/ctrl-1)*100):'N/A')+'%');renderVal('cx_control',money(cctrl));renderVal('cx_treat',money(ctreat));renderVal('cx_delta',money(change));flag('cx_delta',change>=0);
+ renderVal('note-cro',v.cx_corders>v.cx_sessions||v.cx_torders>v.cx_sessions?'Invalid inputs: order counts must not exceed visitors for binary-conversion model.':change>=0?'Positive contribution per visitor point estimate. Causal power, randomization and return maturity still need verification.':'Reject broad rollout on this pricing test. Conversion rate improvement cannot make up for lower contribution per paid order.');
+ const chex=v.ch_spend+v.ch_rights,chvalue=v.ch_buyers*v.ch_cm,chprofit=chvalue-chex;
+ renderVal('ch_cash',money(chex));renderVal('ch_icac',v.ch_buyers>0?money(chex/v.ch_buyers):'Undefined');renderVal('ch_profit',money(chprofit));renderVal('ch_gate',v.ch_stock!==1?'BLOCK':chprofit>=0?'Pilot':'No scale');flag('ch_profit',chprofit>=0&&v.ch_stock===1);
+ renderVal('note-channels',v.ch_stock!==1?'No stock or paid use rights: do not invest irrespective of platform ROAS.':chprofit>=0?'The marginal proxy is positive, but the forecast must be validated with an incrementality design.':'Do not rank by attributed ROAS. The next marginal spend block destroys first-order contribution under these assumptions.');
+ const monthlyCost=v.tl_price+(v.tl_setup/v.tl_amort+v.tl_maint*4)*v.tl_hourly,timeBenefit=v.tl_saved*4*v.tl_hourly,toolResult=timeBenefit+v.tl_new*v.tl_cm-monthlyCost;
+ renderVal('tl_cost',money(monthlyCost));renderVal('tl_saving',money(timeBenefit));renderVal('tl_profit',money(toolResult));renderVal('tl_gate',v.tl_access===1?(toolResult>=0?'Test':'Stay manual'):'BLOCK');flag('tl_profit',toolResult>=0&&v.tl_access===1);
+ renderVal('note-tools',v.tl_access!==1?'BLOCK: user data permissions and least-privilege requirements cannot be bypassed by better ROI.':toolResult>=0?'Potential efficiency, not deposited cash. Verify that saved owner hours and buyer impact actually materialize.':'A manual workflow can be cheaper until volume justifies paid software.');
+ const cfHead=v.cf_bank-v.cf_floor-v.cf_prev-v.cf_project,fullOut=v.cf_new*v.cf_cm-v.cf_project,riskOut=v.cf_new*v.cf_cm*v.cf_conf/100-v.cf_project;
+ renderVal('cf_headroom',money(cfHead));renderVal('cf_expected',money(fullOut));renderVal('cf_risk',money(riskOut));renderVal('cf_gate',v.cf_eligible!==1?'BLOCK RIGHTS/STOCK':cfHead<0?'BLOCK CASH':riskOut<0?'No / revise':'Pilot');flag('cf_risk',cfHead>=0&&riskOut>=0&&v.cf_eligible===1);
+ renderVal('note-cfo',v.cf_eligible!==1?'Eligibility fails. No spend can proceed until valid rights and stock exist.':cfHead<0?'Previously approved commitments plus this new project would breach protected liquidity.':riskOut<0?'The full upside may be positive, but the conservative cash and forecast-adjusted case is negative.':'Financially plausible as a pilot. Causality remains unknown; never automatically spend remaining bank cash.');
+ const available=v.cp_bank-v.cp_reserve,cost=v.cp_d1+v.cp_d2+v.cp_d3+v.cp_rights,cap=v.cp_buyers*v.cp_cm-cost;
+ renderVal('cp_budget',money(available));renderVal('cp_spend',money(cost));renderVal('cp_cm2',money(cap));renderVal('cp_gate',v.cp_available!==1?'BLOCK RIGHTS/STOCK':cost>available?'BLOCK LIQUIDITY':cap<0?'Revise':'Pilot only');flag('cp_cm2',cost<=available&&cap>=0&&v.cp_available===1);
+ renderVal('note-capstone',v.cp_available!==1?'A profitable model does not authorize a stockout or unlicensed creator asset.':cost>available?'This plan breaches the protected cash floor even if future CM2 looks attractive.':cap>=0?'A cash-feasible hypothetical plan, not a measured 90-day result. Define experiments, stop-loss and owner per phase.':'Current 90-day spending plan does not recover full first-order contribution. Reduce cost or improve genuinely new buyers.');
+ try{localStorage.setItem(stateKey,JSON.stringify(v))}catch(e){renderVal('storage','Local storage unavailable; export to keep your inputs.')}
+}
+for(const b of document.querySelectorAll('[data-tab]'))b.addEventListener('click',()=>{for(const x of document.querySelectorAll('[data-tab]')){x.classList.toggle('active',x===b);x.setAttribute('aria-selected',String(x===b))}for(const section of box.children)section.hidden=section.id!==b.dataset.tab});
+document.getElementById('reset').addEventListener('click',()=>{values={...defaults};for(const el of document.querySelectorAll('[data-input]'))el.value=values[el.dataset.input];calculate()});
+document.getElementById('export').addEventListener('click',()=>{const b=new Blob([JSON.stringify({dataset:'DTC Growth Academy synthetic lab assumptions',exported:new Date().toISOString(),values},null,2)],{type:'application/json'});const u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='growth-operator-synthetic.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),500)});
+calculate();
+})();
+</script></body></html>
