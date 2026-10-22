@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Commerce Profit Studio | DTC Growth Academy</title><meta name="description" content="Interactive fictional TikTok Spark, Google Shopping and ecommerce CRO commercial decision labs.">
+<style>
+:root{color-scheme:dark;font:16px system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#091c21;color:#edf7f5}*{box-sizing:border-box}
+body{margin:0}a{color:#94ebc8;text-decoration:none}.wrap{max-width:1100px;margin:auto;padding:24px}
+header{border-bottom:1px solid #31555e}.top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.brand{font-weight:800;font-size:14px;letter-spacing:.06em}.eyebrow{font-size:12px;color:#87dcbf;letter-spacing:.11em;text-transform:uppercase}
+.hero{padding:30px 0 11px}h1{font-size:clamp(34px,5vw,54px);line-height:1.05;letter-spacing:-.045em;margin:16px 0}h2{font-size:24px;margin:6px 0 12px}
+p{color:#b3cdcb;line-height:1.6}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+button{font:inherit;border:1px solid #3d666b;background:#18383e;color:#d8ece6;padding:12px 16px;border-radius:11px;cursor:pointer}
+button.active,button.main{background:#81dfbb;border-color:#81dfbb;color:#07332a;font-weight:750}
+.grid{display:grid;grid-template-columns:minmax(300px,1fr) minmax(320px,1.05fr);gap:16px}
+.panel{background:#123239;border:1px solid #335a60;border-radius:17px;padding:22px;min-width:0}
+label{display:flex;justify-content:space-between;gap:10px;margin:15px 0 7px;font-size:14px}
+label span{font-weight:800;font-variant-numeric:tabular-nums;color:#fcfffe}input[type=range]{width:100%;accent-color:#86e3c0;cursor:pointer}
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.metric{padding:16px;background:#0a252b;border-radius:12px}.metric small{display:block;color:#94b8b9}
+.metric strong{display:block;font-size:25px;margin-top:7px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.profit{color:#8ceab4}.loss{color:#ffad9e}
+.note{background:#183e42;border-left:3px solid #83dfbc;padding:13px;border-radius:4px;margin-top:15px;line-height:1.65;color:#cae2df}
+.formula{font:12px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;border:1px solid #45676b;border-radius:11px;padding:13px;margin-top:15px;color:#b9d3d3}
+footer{border-top:1px solid #31555e;color:#91b4b3;font-size:12px;margin-top:30px;padding:22px 0;line-height:1.6}[hidden]{display:none!important}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.wrap{padding:16px}.panel{padding:17px}.metric strong{font-size:23px}}
+</style></head><body><header><div class="wrap top"><span class="brand">◈ DTC GROWTH ACADEMY / COMMERCIAL SIMULATIONS</span><a href="../index.html">← Operator Labs</a></div></header>
+<main class="wrap"><div class="hero"><div class="eyebrow">Advanced decision labs · Days 12–14</div>
+<h1>More conversions.<br>Less profit?</h1>
+<p>Evaluate Spark creator contracts, branded search economics and ecommerce CRO interventions. Synthetic teaching values only; all calculations stay in your browser and are not validated causal results.</p></div>
+<nav class="tabs" role="tablist" aria-label="Select commercial training lab">
+<button class="active" role="tab" aria-selected="true" data-tab="spark">12 · Spark Ads</button>
+<button role="tab" aria-selected="false" data-tab="shopping">13 · Shopping/PMax</button>
+<button role="tab" aria-selected="false" data-tab="cro">14 · CRO Finance</button></nav>
+<div id="labs"></div><div style="margin-top:25px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+<button class="main" id="export">Export hypothetical scenario</button><button id="reset">Reset assumptions</button>
+<small style="color:#a1c1bf" id="storage">Hypothetical inputs are saved locally when supported.</small></div>
+<footer>This training app does not use analytics, external code, passwords, customer data or actual commerce systems. Platform ROAS and estimated incremental shares are not proof of additional profit. Before spending money, validate source order, tax, refunds, costs, authorization, and merchant eligibility.</footer>
+</main><script>
+(()=>{'use strict';
+const specs={
+spark:{title:'TikTok Spark purchase gate',intro:'An inexpensive media buy can look exceptional while a paid creator and limited Spark rights make total acquisition unprofitable.',fields:[
+['s_orders','Attributed orders',110,5,400,5,''],
+['s_gross','Gross checkout per attributed order',70,20,180,1,'€'],
+['s_media','TikTok media spend',450,100,4000,50,'€'],
+['s_creator','Creator publishing fee',1200,0,4000,100,'€'],
+['s_rights','Paid post rights',250,0,1200,50,'€'],
+['s_ops','Samples + ops',100,0,1200,25,'€'],
+['s_new','New-buyer share (unverified)',20,0,100,5,'%'],
+['s_incremental','True incremental share (hypothesis)',20,0,100,5,'%'],
+['s_cm','CM1 per incremental new order',28,5,100,1,'€']],
+metrics:[['s_roasout','Media-only gross ROAS'],['s_iordersout','Proxy incremental new orders'],['s_icacout','All-in iCAC'],['s_profitout','Proxy first-order CM2']],
+formula:'Platform ROAS = attributed orders × gross checkout ÷ media. Proxy new orders = attributed orders × new share × incremental share. CM2 = proxy new orders × CM1 − media − creator − rights − samples/ops.'},
+shopping:{title:'Google Shopping / PMax product gate',intro:'Brand queries can capture existing demand. Even a profitable calculation cannot authorize a disapproved or out-of-stock product.',fields:[
+['g_orders','Attributed orders',140,10,300,5,''],
+['g_gross','Gross checkout / order',70,20,170,1,'€'],
+['g_media','Media spend',500,100,5000,50,'€'],
+['g_ops','Feed + creative operations',100,0,1500,25,'€'],
+['g_new','New-buyer share (unverified)',10,0,100,5,'%'],
+['g_inc','Incremental share (hypothesis)',20,0,100,5,'%'],
+['g_cm','CM1 per truly new order',22,5,100,1,'€'],
+['g_feed','Feed eligible (1=yes)',1,0,1,1,''],
+['g_stock','In-stock gate (1=yes)',1,0,1,1,'']],
+metrics:[['g_roasout','Platform gross ROAS'],['g_iordersout','Proxy incremental buyers'],['g_icacout','All-in iCAC'],['g_profitout','Proxy CM2']],
+formula:'Positive proxy CM2 is not enough: feed eligibility and stock must both be confirmed. PMax gross attribution may contain existing branded searches and prior purchases. New customer and true incrementality are separate concepts.'},
+cro:{title:'CRO change: conversion vs CM',intro:'Compare one modeled checkout change against the same 10,000 eligible sessions. Baseline: 280 orders of €49, 21% VAT, 8% refunds, €18 cost, 2.5% + €0.35 payment fee and €4 return processing.',fields:[
+['c_orders','Treatment purchases',335,200,500,5,''],
+['c_price','Gross paid / treatment order',49,20,90,.5,'€'],
+['c_cost','Goods + shipping / treatment order',21,10,55,.5,'€'],
+['c_refund','Treatment full-refund rate',8,0,30,1,'%'],
+['c_fixed','Experiment build cost',350,0,2000,50,'€']],
+metrics:[['c_cvrout','Treatment CVR'],['c_cmout','Treatment CM1 / order'],['c_deltaout','Delta total CM vs control'],['c_neededout','Orders needed to beat baseline']],
+formula:'Treat CM1 = (gross paid ÷ 1.21) × (1 − refunds) − goods/shipping − (gross × 2.5% + €0.35) − refunds × €4. Total CM = purchases × CM1 − fixed test cost. Baseline CM is derived from 280 original orders. No statistical inference is made.'}
+};
+const defaults={};for(const s of Object.values(specs))for(const f of s.fields)defaults[f[0]]=f[2];
+let v={...defaults};const key='dtc-commerce-labs-v1';try{const prior=JSON.parse(localStorage.getItem(key)||'{}');for(const k of Object.keys(defaults))if(Number.isFinite(prior[k]))v[k]=prior[k]}catch(e){}
+const host=document.getElementById('labs');const nf=new Intl.NumberFormat('en-US',{maximumFractionDigits:2});
+const fmt=n=>Number.isFinite(n)?nf.format(n):'N/A';
+const money=n=>(n<0?'−€':'€')+fmt(Math.abs(n));
+const set=(id,x)=>{const e=document.getElementById(id);if(e)e.textContent=x};
+const tone=(id,ok)=>{const e=document.getElementById(id);if(e)e.className=ok?'profit':'loss'};
+for(const [name,s] of Object.entries(specs)){
+const sec=document.createElement('section');sec.className='grid';sec.id=name;sec.hidden=name!=='spark';
+const left=document.createElement('div');left.className='panel';left.innerHTML='<div class="eyebrow">Input variables</div><h2>'+s.title+'</h2><p>'+s.intro+'</p>';
+for(const f of s.fields){const label=document.createElement('label');label.append(document.createTextNode(f[1]));const span=document.createElement('span');span.id='val-'+f[0];label.append(span);const slider=document.createElement('input');slider.type='range';slider.min=f[3];slider.max=f[4];slider.step=f[5];slider.value=v[f[0]];slider.dataset.input=f[0];slider.setAttribute('aria-label',f[1]);slider.addEventListener('input',()=>{v[f[0]]=Number(slider.value);calc()});left.append(label,slider)}
+const right=document.createElement('div');right.className='panel';right.innerHTML='<div class="eyebrow">Commercial decision</div><h2>Contribution gate</h2>';
+const grid=document.createElement('div');grid.className='metrics';
+for(const [id,cap] of s.metrics){const el=document.createElement('div');el.className='metric';const small=document.createElement('small');small.textContent=cap;const strong=document.createElement('strong');strong.id=id;el.append(small,strong);grid.append(el)}
+right.append(grid);const note=document.createElement('div');note.id='note-'+name;note.className='note';right.append(note);
+const math=document.createElement('div');math.className='formula';math.textContent=s.formula;right.append(math);sec.append(left,right);host.append(sec);
+}
+function calc(){
+ for(const s of Object.values(specs))for(const f of s.fields)set('val-'+f[0],f[6]==='%'?fmt(v[f[0]])+'%':f[6]+fmt(v[f[0]]));
+ const sparkCost=v.s_media+v.s_creator+v.s_rights+v.s_ops;
+ const sparkNew=v.s_orders*v.s_new/100*v.s_incremental/100;
+ const sparkCM=sparkNew*v.s_cm-sparkCost;
+ set('s_roasout',fmt(v.s_orders*v.s_gross/v.s_media)+'x');set('s_iordersout',fmt(sparkNew));set('s_icacout',sparkNew>0?money(sparkCost/sparkNew):'Undefined');set('s_profitout',money(sparkCM));tone('s_profitout',sparkCM>=0);
+ set('note-spark',sparkCM>=0?'Profitability passes as a mathematical proxy only. Before scaling, validate the creator rights, true new orders, content attribution and refund-adjusted CM.':'Pause or renegotiate. High attributed ROAS cannot justify the creator fee, paid usage and media unless additional genuinely incremental contribution can be demonstrated.');
+ const googleCost=v.g_media+v.g_ops,googleNew=v.g_orders*v.g_new/100*v.g_inc/100,googleCM=googleNew*v.g_cm-googleCost,gate=v.g_feed===1&&v.g_stock===1;
+ set('g_roasout',fmt(v.g_orders*v.g_gross/v.g_media)+'x');set('g_iordersout',fmt(googleNew));set('g_icacout',googleNew>0?money(googleCost/googleNew):'Undefined');set('g_profitout',money(googleCM));tone('g_profitout',googleCM>=0&&gate);
+ set('note-shopping',!gate?'BLOCK: Feed eligibility and inventory are prerequisites; historical attributed ROI cannot authorize current product delivery.':googleCM>=0?'Mathematical CM gate passes, but only a controlled incrementality test and verified product-level costs can justify scaling.':'Pause paid scale. High brand/search attribution likely includes nonincremental demand, or product costs are too high.');
+ const baseline=(49/1.21*.92-18-(49*.025+.35)-.08*4)*280;
+ const treatmentCm=v.c_price/1.21*(1-v.c_refund/100)-v.c_cost-(v.c_price*.025+.35)-(v.c_refund/100)*4;
+ const result=v.c_orders*treatmentCm-v.c_fixed,delta=result-baseline,needed=treatmentCm>0?Math.ceil((baseline+v.c_fixed)/treatmentCm):null;
+ set('c_cvrout',fmt(v.c_orders/100)+'%');set('c_cmout',money(treatmentCm));set('c_deltaout',money(delta));set('c_neededout',needed===null?'Not possible':fmt(needed));tone('c_deltaout',delta>=0);
+ set('note-cro',delta>=0?'Treatment predicts higher total CM under these assumptions. Still requires randomized evidence, refund lag and checkout QA before rollout.':'Converting more shoppers does not help if the price, shipping subsidy, refund rate or production costs destroy contribution. Redesign the offer or reject the test.');
+ try{localStorage.setItem(key,JSON.stringify(v))}catch(e){set('storage','Browser storage is unavailable. Export your inputs.')}
+}
+for(const b of document.querySelectorAll('[data-tab]'))b.addEventListener('click',()=>{for(const x of document.querySelectorAll('[data-tab]')){x.classList.toggle('active',x===b);x.setAttribute('aria-selected',String(x===b))}for(const section of host.children)section.hidden=section.id!==b.dataset.tab});
+document.getElementById('reset').addEventListener('click',()=>{v={...defaults};for(const input of document.querySelectorAll('[data-input]'))input.value=v[input.dataset.input];calc()});
+document.getElementById('export').addEventListener('click',()=>{const file=new Blob([JSON.stringify({course:'DTC Growth Academy',dataType:'synthetic training assumptions, no source customer data',savedAt:new Date().toISOString(),inputs:v},null,2)],{type:'application/json'});const url=URL.createObjectURL(file);const a=document.createElement('a');a.href=url;a.download='commerce-profit-synthetic.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),300)});
+calc();
+})();
+</script></body></html>
